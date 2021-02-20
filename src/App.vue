@@ -1,20 +1,25 @@
 <template>
   <div id="app">
-    <b-container>
+    <b-container class="mt-2">
       <b-row>
-        <b-col>
-          
-        </b-col>
+        <Poke/>
       </b-row>
     </b-container>
   </div>
 </template>
 
 <script>
+import Poke from './components/Poke'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      
+    }
+  },
   components: {
+    Poke
   }
 }
 </script>
