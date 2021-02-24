@@ -1,11 +1,6 @@
 <template>
     <b-card>
         <template #header> #{{index}} - {{ name | Capitalizer }} </template>
-        <b-row>
-            <b-col cols="5" class="ml-auto">
-                <b-button class="flip-btn" @click="flipSprite()">Mudar sprite</b-button>
-            </b-col>
-        </b-row>
         <b-card-img :src="currentImg" alt="Pokemon image" @mouseover="flipSprite()" @mouseleave="flipSprite()"></b-card-img>
         <b-card-sub-title class="pokemon-types">
             <b-row>
@@ -15,7 +10,7 @@
             </b-row>
         </b-card-sub-title>
         <b-list-group>
-            <p class="mt-3"><b>HABILIDADES:</b></p>
+            <p class="mt-3"><b>Abilities:</b></p>
             <b-list-group-item v-for="(abilities, abilityIndex) in pkmnAbilities" :key="abilityIndex">
                 {{abilities.ability.name | Capitalizer}}
             </b-list-group-item>
@@ -61,11 +56,9 @@ export default {
             if (this.isFront == true) {
                 this.currentImg = this.pkmnBackSprites
                 this.isFront = false
-                console.log('Trocar para back')
             } else{
                 this.currentImg = this.pkmnFrontSprites
                 this.isFront = true
-                console.log('Trocar para front')
             }
         }
     }
@@ -84,7 +77,7 @@ export default {
     background: silver;
     border: 0px;
     font-size: 12px;
-    width: 65px;
+    width: 90px;
 }
 
 .pokemon-types{
@@ -141,5 +134,11 @@ export default {
 }
 .ghost{
     color:blueviolet;
+}
+.ice{
+    color: aqua;
+}
+.dragon{
+    color:lightseagreen;
 }
 </style>
