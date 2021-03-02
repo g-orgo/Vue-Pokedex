@@ -1,2 +1,3 @@
 # Pokedex
-Soon
+
+Pokedex build by VUEJS
