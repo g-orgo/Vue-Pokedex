@@ -1,7 +1,9 @@
 <template>
     <b-card>
         <template #header> #{{index}} - {{ name | Capitalizer }} </template>
-        <b-card-img :src="currentImg" alt="Pokemon image" @mouseover="flipSprite()" @mouseleave="flipSprite()"></b-card-img>
+        <transition name="flip">
+            <b-card-img :src="currentImg" alt="Pokemon image" @mouseover="flipSprite()" @mouseleave="flipSprite()"></b-card-img>
+        </transition>
         <b-card-sub-title class="pokemon-types">
             <b-row>
                 <b-col v-for="(types, typesIndex) in pkmnTypes" :key="typesIndex">
@@ -71,13 +73,6 @@ export default {
 .card{
     max-width: 250px;
     min-width: 250px;
-}
-
-.flip-btn{
-    background: silver;
-    border: 0px;
-    font-size: 12px;
-    width: 90px;
 }
 
 .pokemon-types{
