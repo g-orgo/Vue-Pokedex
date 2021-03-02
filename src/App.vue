@@ -7,15 +7,15 @@
       </b-navbar-brand>
       <b-nav-form class="ml-auto">
         <b-form-input placeholder="Search for a pokemon" v-model="searched"></b-form-input>
-        <b-button class="search-btn ml-2">
+        <!-- <b-button class="search-btn ml-2" @click="searchEngine()">
           <b-icon icon="search"></b-icon>
-        </b-button>
+        </b-button> -->
       </b-nav-form>
     </b-navbar>
   </header>
   <b-container  class="mt-3" fluid>
     <b-row>
-        <b-col v-for="(pokemon, index) in searchedFor" :key="index" class="mb-2">
+        <b-col v-for="(pokemon, index) in searchedFor" :key="pokemon.url" class="mb-2">
             <Poke :name="pokemon.name" :url="pokemon.url" :index="index+1"/>
         </b-col>
     </b-row>
@@ -31,25 +31,41 @@ export default {
     data(){
         return{
             pokemonList: [],
+            /* filteredpkmns: [], */
             pokemonURLS: [],
-            searched: ''
+            searched: '',            
         }
     },
     created: function(){
         axios.get('https://pokeapi.co/api/v2/pokemon?limit=151&offset=0').then(res=> {
             this.pokemonList = res.data.results;
+            this.filteredpkmns = res.data.results;
         })
     },
     components:{
       Poke
     },
+    /* methods:{
+      searchEngine: function(){
+        I've commented this method cause i want to people
+        see what they're searching while they do it.
+        But, if you want a search by button use this.
+
+        this.filteredpkmns = this.pokemonList;
+
+        if (this.searched == '' || this.searched == ' ') {
+          this.filteredpkmns = this.pokemonList;
+        } else{
+          this.filteredpkmns = this.pokemonList.filter(pokemon => pokemon.name == this.searched);
+        }
+      }
+    }, */
     computed: {
       searchedFor: function() {
         if (this.searched == '' || this.searched == ' ') {
           return this.pokemonList
         } else{
-          return this.pokemonList.filter(pokemon => pokemon.name == this.searched)
-          /* return this.pokemonList.filter(pokemon => pokemon.name.includes(this.searched)) */
+          return this.pokemonList.filter(pokemon => pokemon.name.includes(this.searched))
         }
       },
     }
